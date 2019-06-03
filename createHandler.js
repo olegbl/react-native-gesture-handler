@@ -5,7 +5,7 @@ import RNGestureHandlerModule from './RNGestureHandlerModule';
 
 import State from './State';
 
-import UIManager from 'NativeUIManager';
+const { UIManager } = NativeModules;
 
 // Wrap JS responder calls and notify gesture handler manager
 const {
@@ -25,13 +25,8 @@ UIManager.clearJSResponder = () => {
 // native module.
 // Once new event types are registered with react it is possible to dispatch these
 // events to all kind of native views.
-UIManager.genericDirectEventTypes = {
-  ...UIManager.genericDirectEventTypes,
-  onGestureHandlerEvent: { registrationName: 'onGestureHandlerEvent' },
-  onGestureHandlerStateChange: {
-    registrationName: 'onGestureHandlerStateChange',
-  },
-};
+UIManager.getConstants().genericDirectEventTypes['onGestureHandlerEvent'] = { registrationName: 'onGestureHandlerEvent' };
+UIManager.getConstants().genericDirectEventTypes['onGestureHandlerStateChange'] = { registrationName: 'onGestureHandlerStateChange' };
 
 let handlerTag = 1;
 const handlerIDToTag = {};
