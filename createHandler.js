@@ -25,8 +25,10 @@ UIManager.clearJSResponder = () => {
 // native module.
 // Once new event types are registered with react it is possible to dispatch these
 // events to all kind of native views.
-UIManager.getConstants().genericDirectEventTypes['onGestureHandlerEvent'] = { registrationName: 'onGestureHandlerEvent' };
-UIManager.getConstants().genericDirectEventTypes['onGestureHandlerStateChange'] = { registrationName: 'onGestureHandlerStateChange' };
+const constants = UIManager.getConstants();
+constants.genericDirectEventTypes = constants.genericDirectEventTypes ?? {};
+constants.genericDirectEventTypes['onGestureHandlerEvent'] = {registrationName: 'onGestureHandlerEvent'};
+constants.genericDirectEventTypes['onGestureHandlerStateChange'] = {registrationName: 'onGestureHandlerStateChange'};
 
 let handlerTag = 1;
 const handlerIDToTag = {};
