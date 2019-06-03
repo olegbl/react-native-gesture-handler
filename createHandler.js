@@ -5,7 +5,7 @@ import RNGestureHandlerModule from './RNGestureHandlerModule';
 
 import State from './State';
 
-const { UIManager } = NativeModules;
+import UIManager from 'NativeUIManager';
 
 // Wrap JS responder calls and notify gesture handler manager
 const {
