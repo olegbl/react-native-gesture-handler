@@ -33,9 +33,6 @@ module.exports = {
   get TextInput() {
     return memoizeWrap(ReactNative.TextInput);
   },
-  get ToolbarAndroid() {
-    return memoizeWrap(ReactNative.ToolbarAndroid);
-  },
   get DrawerLayoutAndroid() {
     const DrawerLayoutAndroid = memoizeWrap(ReactNative.DrawerLayoutAndroid, {
       disallowInterruption: true,
