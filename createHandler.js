@@ -50,6 +50,16 @@ UIManager.getConstants = () => {
   };
 };
 
+// latest versions of React Native do not allow modifying UIManager directly
+// so the events need to be injected into the real constants variable
+(function() {
+  const constants = oldGetConstants()
+  constants.genericDirectEventTypes = constants.genericDirectEventTypes || {};
+  Object.keys(customGHEventsConfig).map(key => {
+    constants.genericDirectEventTypes[key] = customGHEventsConfig[key];
+  });
+})();
+
 let handlerTag = 1;
 const handlerIDToTag = {};
 
