@@ -16,6 +16,22 @@ function memoizeWrap(Component, config) {
   ));
 }
 
+function memoizeFlatList() {
+  if (!MEMOIZED.FlatList) {
+    const ScrollView = memoizeWrap(ReactNative.ScrollView, {
+      disallowInterruption: true,
+    });
+    MEMOIZED.FlatList = React.forwardRef((props, ref) => (
+      <ReactNative.FlatList
+        ref={ref}
+        {...props}
+        renderScrollComponent={scrollProps => <ScrollView {...scrollProps} />}
+      />
+    ));
+  }
+  return MEMOIZED.FlatList;
+}
+
 module.exports = {
   /* RN's components */
   get ScrollView() {
@@ -41,16 +57,6 @@ module.exports = {
     return DrawerLayoutAndroid;
   },
   get FlatList() {
-    if (!MEMOIZED.FlatList) {
-      const ScrollView = this.ScrollView;
-      MEMOIZED.FlatList = React.forwardRef((props, ref) => (
-        <ReactNative.FlatList
-          ref={ref}
-          {...props}
-          renderScrollComponent={scrollProps => <ScrollView {...scrollProps} />}
-        />
-      ));
-    }
-    return MEMOIZED.FlatList;
+    return memoizeFlatList();
   },
 };
